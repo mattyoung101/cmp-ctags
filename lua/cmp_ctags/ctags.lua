@@ -1,4 +1,3 @@
-local debug = require "cmp.utils.debug"
 local Process = require "cmp_ctags.process"
 local Ctags = {}
 
@@ -22,7 +21,6 @@ function Ctags:search_executable()
   local p = Process.new(self.executable, { "--help" })
   p:run(function(result)
     if not result.is_successful then
-      debug.log { message = "execution failed", path = self.executable, code = result.code, stderr = result.stderr }
     end
     self.searched = true
     self.has_valid_executable = result.is_successful
@@ -41,7 +39,6 @@ function Ctags:get_completion_items(filename, cwd, callback)
   )
   p:run(function(result)
     if not result.is_successful then
-      debug.log { message = "ctags execution failed", code = result.code, stderr = result.stderr }
       return
     end
     local results = {}

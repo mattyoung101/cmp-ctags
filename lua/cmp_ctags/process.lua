@@ -1,5 +1,4 @@
 local uv = vim.loop
-local debug = require "cmp.utils.debug"
 
 local Pipe = {}
 
@@ -55,7 +54,6 @@ function Process:run(callback)
   end)
   if not handle then
     self:pipe_close()
-    debug.log { message = "process cannot spawn", cmd = self.cmd, args = self.args, err = err }
   else
     self.stdout:read_start()
     self.stderr:read_start()
